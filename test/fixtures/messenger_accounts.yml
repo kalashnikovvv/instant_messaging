@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  messenger_type: MyString
+  recipient: MyString
+  last_message: MyText
+  user: one
+
+two:
+  messenger_type: MyString
+  recipient: MyString
+  last_message: MyText
+  user: two

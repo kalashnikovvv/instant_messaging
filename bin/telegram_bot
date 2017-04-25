@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require "#{__dir__}/../config/environment"
+require 'telegram/bot'
+
+Telegram::Bot::Client.run(ENV['TELEGRAM_API_TOKEN']) do |bot|
+  bot.listen do |message|
+    MessengerAccounts::Registrator.new(:telegram, message.chat.id, message.text).call
+  end
+end
