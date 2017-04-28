@@ -8,8 +8,7 @@ module MessagesBatches
 
     def call
       messages_batch.users.each do |user|
-        next if user.last_message == messages_batch.text
-        user.update_column(:last_message, messages_batch.text)
+        next unless unique_message_for_user?(messages_batch.text, user)
 
         messages_batch.messenger_types.each do |messenger_type|
           sender = MessageSender
@@ -21,6 +20,12 @@ module MessagesBatches
           )
         end
       end
+    end
+
+    private
+
+    def unique_message_for_user?(text, user)
+      Redis.current.hsetnx("users:#{user.id}:messages", text, true)
     end
   end
 end

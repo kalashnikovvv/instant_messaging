@@ -35,6 +35,8 @@ group :test do
 
   gem 'factory_girl_rails'
 
+  gem 'mock_redis'
+
   gem 'rspec-rails', '~> 3.4'
 
   gem 'vcr'
