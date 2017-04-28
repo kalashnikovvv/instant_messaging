@@ -8,4 +8,8 @@ class MessagesBatch
   attribute :send_at, DateTime
 
   validates :text, :user_ids, :messenger_types, presence: true
+
+  def users
+    User.where(id: user_ids)
+  end
 end

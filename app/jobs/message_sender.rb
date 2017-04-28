@@ -3,12 +3,9 @@ class MessageSender < ApplicationJob
 
   def perform(options)
     messenger_account = find_messenger_account(options[:user_id], options[:messenger_type])
-    return false if messenger_account.last_message == options[:text]
 
     messanger = get_messenger(options[:messenger_type])
     messanger.send_message(recipient: messenger_account.recipient, text: options[:text])
-    messenger_account.update_column(:last_message, options[:text])
-    true
   end
 
   private
